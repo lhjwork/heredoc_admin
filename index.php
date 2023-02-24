@@ -2,9 +2,8 @@
 include_once('head.php');
 include_once('menu.php');
 
-// echo "jin test".$_SERVER["DOCUMENT_ROOT"];
 
-// ?>
+ ?>
 
 	
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
