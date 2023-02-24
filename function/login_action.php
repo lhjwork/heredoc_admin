@@ -22,7 +22,7 @@
 
 <?
 
-	include('../.././lib/connect.php');
+	include('../dbCon.php');
 	
 	$connect = connect();
 	
@@ -57,7 +57,7 @@
 			
 			if($url == ''){
 				
-				echo "<script>window.location.replace('../../index.php');</script>";
+				echo "<script>window.location.replace('../index.php');</script>";
 			
 			}else{
 			

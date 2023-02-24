@@ -1,7 +1,7 @@
 <?
 
-	include('./lib/common.php'); 
-	// $url = $_GET['url'];
+	include('common.php'); 
+	$url = $_GET['url'];
 
 
 	//로그인 페이지
@@ -14,6 +14,13 @@
 	}else if (!isset($_SESSION['t_id'])){ 
         echo ('');
     }
+
+
+	// if ($_SESSION['t_id'] != '') {
+			
+	// 	echo ("<script language='javascript'>window.location.replace('index.php');</script>");
+
+	// }
 		
 ?>	
 
@@ -67,7 +74,7 @@
 		<div class="login-box-body">
 			
 
-			<form action="<?echo $host;?>/function/auth/login_action.php" method="post" id="frm_login">
+			<form action="<?echo $host;?>/function/login_action.php" method="post" id="frm_login">
 				
 				<input type="hidden" id="url" name="url" value="<?echo $url;?>"/>
 				
