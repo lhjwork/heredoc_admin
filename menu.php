@@ -36,7 +36,7 @@
 			<div class="user-panel">
 
 				<div class="pull-left image">
-					<img src="https://ez-mc.com/admin_landing/dist/img/boxed-bg.jpg" class="img-circle" alt="User Image">
+					<img src="../admin_landing/dist/img/boxed-bg.jpg" class="img-circle" alt="User Image">
 				</div>
 			
 				<a href="" data-target="#pw" data-toggle="modal">
@@ -83,9 +83,6 @@
 					<h4 class="modal-title">이름수정</h4>
 		   
 				</div>
-
-				
-
 
 		   
 				<div id="modal_name"></div>
@@ -162,7 +159,16 @@
 	</div>
 	
 	<script>
-		
+		function madal_name(t_no){
+			$.ajax({
+
+				url: "<?php echo $host;?>/data/name_data.php?t_no=" + $t_no,
+				dataType: "html",
+				success: function(date){
+					$("#modal_name").html(date);
+				}
+			});
+		}
 
 		
 		
