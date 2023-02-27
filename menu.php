@@ -7,16 +7,16 @@
 
 	<header class="main-header">
 		
-		<a href="" class="logo">
-			<span class="logo-mini"><b>Consult</span>
+		<a  href="" class="logo">
+			<span class="logo-mini">Consult</span>
 			<span class="logo-lg">Consult</span>
 		</a>
-		<nav class="navbar navbar-static-top">
-			
-			<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+
+		<nav>
+			<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button"> 
 				<span class="sr-only">메뉴 버튼</span>
 			</a>
-			
+
 			<ul class="nav navbar-top-links navbar-right" style="margin-right: 10px;margin-top: 5px">
 				
 				<li>
@@ -26,9 +26,7 @@
 				</li>
 		
 			</ul>
-			
 		</nav>
-		
 	</header>
 	
 	<aside class="main-sidebar">
@@ -51,28 +49,21 @@
 				</a>
 			
 			</div>
-			
-			<?
-			
+
+			<?php
+				
 				if($t_member_access == 'admin'){
-					
-					include_once('menu_admin.php'); 
-					
-				}else if($t_member_access == 'ad' || $t_member_access == 'ad_pm'){
-					
-					include_once('menu_ad.php'); 
-					
+					include_once('./menu/menu_admin.php');
+				}else if($t_member_access == 'ad' || $t_member_access=='ad_pm'){
+					include_once('./menu/menu_ad.php');
 				}else if($t_member_access == 'call' || $t_member_access == 'call_pm'){
-					
-					include_once('menu_call.php'); 
-					
-				}else if($t_member_access == 'jin'){
-					include_once('menu_admin.php'); 
-					include_once('menu_ad.php'); 
-					include_once('menu_call.php');
+					include_once('./menu/menu_call.php');
 				}
+
 			
-			?>
+				?>
+
+	
 			
 		</section>
 		
@@ -92,6 +83,10 @@
 					<h4 class="modal-title">이름수정</h4>
 		   
 				</div>
+
+				
+
+
 		   
 				<div id="modal_name"></div>
 				
@@ -168,70 +163,7 @@
 	
 	<script>
 		
-		function modal_insert_day(t_no){
-			
-			$.ajax({
-					 
-				url: '<?echo $host;?>/data/day_insert_data.php?t_no=' + t_no + '&t_member_id=<?echo $t_member_id;?>',
-				dataType : 'html' ,
-				success: function(data) {
-				  
-				  $("#modal_insert_day").html(data);
-				  
-				}
-						
-			});
-			
-		}
-		
-		function modal_update_day(t_no){
-			
-			$.ajax({
-					 
-				url: '<?echo $host;?>/data/day_update_data.php?t_no=' + t_no,
-				dataType : 'html' ,
-				success: function(data) {
-				  
-				  $("#modal_update_day").html(data);
-				  
-				}
-						
-			});
-			
-		}
-		
-		function modal_name(t_no){
-			
-			$.ajax({
-					 
-				url: '<?echo $host;?>/data/name_data.php?t_no=' + t_no,
-				dataType : 'html' ,
-				success: function(data) {
-				  
-				  $("#modal_name").html(data);
-				  
-				}
-						
-			});
-			
-		}
-		
-		function modal_data(t_no){
-			
-			$.ajax({
-					 
-				url: '<?echo $host;?>/data/db_data.php?t_no=' + t_no,
-				dataType : 'html' ,
-				success: function(data) {
-				  
-				  $("#modal_data").html(data);
-				  
-				}
-						
-			});
-			
-		}
-		
+
 		
 		
 	</script>

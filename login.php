@@ -1,6 +1,7 @@
 <?
 
 	include('common.php'); 
+    // login page 해당 페이지 바로 가도록 url창에 복붙하면 바로 해당 페이지로 가도록 하기 위해서
 	$url = $_GET['url'];
 
 
