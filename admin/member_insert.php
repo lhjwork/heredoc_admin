@@ -36,13 +36,12 @@
 
         $sql = "where t_id != 'admin'";
 
-    }else{
-
     }
 
     $total_count = "SELECT count(t_no) FROM adm_member $sql";
     $total_count = mysqli_query($connect, $total_count);
-    $tottal_count = mysqli_fetch_array($total_count);
+    $total_count = mysqli_fetch_array($total_count);
+
     $total_count = $total_count[0];
 
     // 총 페이지 수 = 전체 카운트 / 페이지 리스트 갯수 
