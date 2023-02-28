@@ -201,14 +201,48 @@
                             <select class="form-control select2" name="t_rank_<?echo $row['t_no']; ?>"
                                 id="t_rank_<?echo $row['t_no']?>" style="width:100%">
                                 <option value="">직급 선택헤주세요.</option>
-                                <option value="사원" <?php attr_selected('사원', $row['t_rank'])?>></option>
+                                <option value="사원" <?php attr_selected('사원', $row['t_rank'])?>>사원</option>
+                                <option value="사원" <?php attr_selected('주임', $row['t_rank'])?>>주임</option>
+                                <option value="사원" <?php attr_selected('대리', $row['t_rank'])?>>대리</option>
+                                <option value="사원" <?php attr_selected('과장', $row['t_rank'])?>>과장</option>
+                                <option value="사원" <?php attr_selected('부장', $row['t_rank'])?>>부장</option>
                             </select>
                         </td>
-                        <td style="vertical-align: middle"></td>
-                        <td style="vertical-align: middle"></td>
-                        <td style="vertical-align: middle"></td>
-                        <td style="vertical-align: middle"></td>
-                        <td style="vertical-align: middle"></td>
+                        <td style="vertical-align: middle">
+                            <select class="form-control select2" name="t_access_<? echo $row['t_no'];?>"
+                                id="t_access_<? echo $row['t_no'];?>" style="width:100%">
+
+                                <option value="">권한을 선택해주세요.</option>
+                                <option value="" <?php attr_selected('ad',$row['t_access'])?>>광고팀</option>
+                                <option value="" <?php attr_selected('ad_pm',$row['t_access'])?>>광고팀장</option>
+                                <option value="" <?php attr_selected('call',$row['t_access'])?>>콜팀</option>
+                                <option value="" <?php attr_selected('call_pm',$row['t_access'])?>>콜팀장</option>
+                            </select>
+
+                        </td>
+                        <td style="vertical-align: middle">
+                            <select class="form-control select2" name="t_team_<?php echo $row['t_no']?>"
+                                id="t_team_<?echo $row['t_no']?>">
+                                <option value="">팀을 선택해주세요.</option>
+                                <option value="1팀 <?php attr_selected('1팀',$row['t_team'])?>">1팀</option>
+                                <option value="2팀 <?php attr_selected('2팀',$row['t_team'])?>">2팀</option>
+                                <option value="3팀 <?php attr_selected('3팀',$row['t_team'])?>">3팀</option>
+                                <option value="4팀 <?php attr_selected('4팀',$row['t_team'])?>">4팀</option>
+                            </select>
+                        </td>
+
+                        <td style="vertical-align: middle">
+                            <?echo $row['t_date'] ?>
+                        </td>
+                        <td style="vertical-align: middle">
+                            <? echo $row['t_login_date'] ?>
+                        </td>
+                        <td style="vertical-align: middle">
+                            <button value="수정" classs="btn btn-primary"
+                                onclick="member_update('<?echo $row['t_no'];?>')">
+
+                            </button>
+                        </td>
 
 
 
