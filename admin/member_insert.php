@@ -6,7 +6,7 @@
     $subject = '멤버 등록';
 
     //서치
-    $find = $_GET['find'] ? $_GET['find'] : 1;
+    $find = ($_GET['find']) ? $_GET['find'] : 1;
 
     //타입 
     $type = $_GET['type'] ? $_GET['type'] : 1;
@@ -94,6 +94,7 @@
                             <div class="form-group">
                                 <!-- <label> 태그는 <input> 태그를 도와주는 역할입니다. <input> 태그가 디자인 하기 힘들 때 <label> 태그로 연결해서 쉽게 디자인하거나 클릭 편의성을 높일 수 있습니다 -->
                                 <label for="t_id">아이디</label>
+                                <!-- 태그의 name 값이 키(Key)로 해서 값(Value)가 전송된다 -->
                                 <input type="text" class="form-control" name="t_id" id="t_id" placeholder="아이디" />
                             </div>
                             <div class="form-group">
@@ -243,7 +244,6 @@
                             </button>
                         </td>
                     </tr>
-
                     <?php 
                     
                         }
