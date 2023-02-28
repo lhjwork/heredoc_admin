@@ -180,7 +180,7 @@
 
                         
                     ?>
-                    < <tr align="center">
+                    <tr align="center">
                         <td style="vertical-align: middle">
                             <? echo $row['t_id'] ?>
                         </td>
@@ -239,23 +239,15 @@
                         </td>
                         <td style="vertical-align: middle">
                             <button value="수정" classs="btn btn-primary"
-                                onclick="member_update('<?echo $row['t_no'];?>')">
-
+                                onclick="member_update('<?echo $row['t_no'];?>')">수정
                             </button>
                         </td>
+                    </tr>
 
-
-
-                        </tr>
-
-
-
-                        <?php 
+                    <?php 
                     
                         }
                     ?>
-
-
 
                 </table>
             </div>
