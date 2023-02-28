@@ -17,7 +17,7 @@
     // 페이지 리스트 갯수
     $list_num = $_GET['list'] ? $_GET['list'] : 10;
 
-    // ?? 
+    // 보여주고자 하는 시작 index위치 db상의
     $s_point = ($list_num - 1) * $list_num;
 
     // 블럭에 나타낼 페이지 번호 갯수
@@ -170,8 +170,57 @@
                     </tr>
 
                     <?php 
+                    // list_num = 페이지 리스트 갯수
+                    // $s_point = ($page_num - 1) * $list_num;
+                    // desc limit 2,3 -->  3번째 부터, 3개의 자료만을 보여준다. (주의) 0부터 시작하므로 3번쨰는 2입니다. 
                         $select = "select * from adm_member $sql ORDER BY t_no DESC limit $s_point, $list_num";
+                        $rs = mysqli_query($connect, $select);
+                        
+                        while($row = mysqli_fetch_array($rs)){
+
+                        
                     ?>
+                    < <tr align="center">
+                        <td style="vertical-align: middle">
+                            <? echo $row['t_id'] ?>
+                        </td>
+                        <td style="vertical-align: middle">
+                            <input type="password" id="t_pw_<?echo $row['t_no']?>" value="<? echo $row['t_pw']?>"
+                                class="form-control">
+                        </td>
+
+                        <td style="vertical-align: middle">
+                            <input type="password" id="t_name_<?echo $row['t_no']?>" value="<? echo $row['t_name']?>"
+                                class="form-control">
+                        </td>
+                        <td style="vertical-align: middle">
+                            <input type="password" id="t_phone_<?echo $row['t_no']?>" value="<? echo $row['t_phone']?>"
+                                class="form-control">
+                        </td>
+                        <td style="vertical-align: middle">
+                            <select class="form-control select2" name="t_rank_<?echo $row['t_no']; ?>"
+                                id="t_rank_<?echo $row['t_no']?>" style="width:100%">
+                                <option value="">직급 선택헤주세요.</option>
+                                <option value="사원" <?php attr_selected('사원', $row['t_rank'])?>></option>
+                            </select>
+                        </td>
+                        <td style="vertical-align: middle"></td>
+                        <td style="vertical-align: middle"></td>
+                        <td style="vertical-align: middle"></td>
+                        <td style="vertical-align: middle"></td>
+                        <td style="vertical-align: middle"></td>
+
+
+
+                        </tr>
+
+
+
+                        <?php 
+                    
+                        }
+                    ?>
+
 
 
                 </table>
