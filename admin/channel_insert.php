@@ -24,7 +24,7 @@
     $list_num  = (isset($_GET['list'])) && $_GET['list'] ? $_GET['list'] :10;
 
     // 보여주고자 하는 시작 index위치 db상의
-    $s_point = ($page_num - 1) * $list_num;
+    $s_point = ($page_num - 1) * $list_num ;
 
     // 블럭에 나타낼 페이지 번호 갯수
     $block_num = 5;
@@ -61,6 +61,33 @@
 
 
 ?>
+
+<script type="text/javascript">
+function channel_insert() {
+    if (document.getElementById("t_name").value == "") {
+        alert("채널명 입력해주세요.");
+        return false;
+    } else {
+        document.insert.submit()
+    }
+}
+
+function channel_update(t_no) {
+
+    var t_name = document.getElementById("t_name_" + t_no).value;
+
+    if (confirm("Are you sure you want to") == true) {
+        $.get("<?echo $host;?>/admin/function/channel_update.php?t_no=" + t_no + "&t_name=" + t_name, function(data,
+            status) {
+            if (data == 200) {
+                alert('수정었습니다.')
+                window.location.reload();
+            }
+        })
+    }
+
+}
+</script>
 
 
 <div class="content-wrapper">
@@ -118,6 +145,110 @@
 
                 </div>
 
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class=" box">
+
+                    <div class="box-header with-border">
+
+                        <h3 class="box-title">채널 현황</h3>
+
+                    </div>
+
+                    <div class="box-body">
+                        <table class="table table-bordered">
+                            <tr style="background:#F9F9F9">
+                                <td align="center" width="10%">채널 코드</td>
+                                <td align="center" width="10%">채널명</td>
+                                <td align="center" width="10%">등록일자</td>
+                                <td align="center" width="5%">수정</td>
+                            </tr>
+
+                            <? 
+                                $select = "select * from adm_channel $sql ORDER BY t_no DESC limit $s_point, $list_num";
+                                $rs = mysqli_query($connect,$select);
+
+
+                                while($row = mysqli_fetch_array($rs)){
+
+                            ?>
+
+                            <tr align="center">
+                                <td style="vertical-align: middle;">
+                                    <? echo $row['t_channel'] ?>
+                                </td>
+                                <td style="vertical-align: middle;">
+                                    <input type="text" id="t_name_<? echo $row['t_no']?>" value="<? echo $row['t_name'];
+                                            ?>" class="form-control" />
+                                </td>
+                                <td style="vertical-align: middle;">
+                                    <? echo $row['t_date'] ?>
+                                </td>
+                                <td style="vertical-align: middle;">
+
+                                    <button value="수정" class="btn btn-primary"
+                                        onclick="channel_update('<? echo $row['t_no']?>')">수정</button>
+                                </td>
+
+                            </tr>
+
+                            <? } ?>
+                        </table>
+                    </div>
+
+                    <div class="box-footer clearfix">
+
+                        <ul class="pagination pagination-sm no-margin pull-right">
+
+                            <? if($page_num <= 1) {?>
+                            <li><a href="">&laquo;</a></li>
+
+                            <? }else{ ?>
+                            <? if($find == 1){ ?>
+                            <li> <a href="?page=<?=$page_num -1?>">&laquo;</a></li>
+
+                            <? }else{ ?>
+
+                            <? } ?>
+
+                            <? } ?>
+
+                            <? for($j = $block_start_page; $j <= $block_end_page; $j++){
+                                if($page_num == $j){
+                    
+                                ?>
+                            <li class="page-item active"><a href="#"><?= $j ?></a></li>
+                            <? }else{ ?>
+
+                            <? if($find == 1){?>
+
+                            <li><a href="?page=<?=$j?>"><?=$j?></a></li>
+
+                            <? }else{ ?>
+
+                            <? } ?>
+
+                            <? } ?>
+                            <? } ?>
+
+                            <? 
+                              $total_block = ceil($total_page / $block_num);
+                              if($block >= $total_block){ }else{
+                            
+                            ?>
+
+                            <? if($find == 1){ ?>
+                            <li><a href="?page=<?=$block_end_page?>">&raquo;</a></li>
+                            <? }else{} ?>
+                            <?}?>
+                        </ul>
+                    </div>
+
+                </div>
             </div>
 
         </div>
