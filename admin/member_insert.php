@@ -6,16 +6,20 @@
     $subject = '멤버 등록';
 
     //서치
-    $find = ($_GET['find']) ? $_GET['find'] : 1;
+    // $find = ($_GET['find']) ? $_GET['find'] : 1;
+    $find = (isset($_GET['find'])) && $_GET['find'] ? $_GET['find'] : 1;
 
     //타입 
-    $type = $_GET['type'] ? $_GET['type'] : 1;
+    // $type = $_GET['type'] ? $_GET['type'] : 1;
+    $type = (isset($_GET['type'])) && $_GET['type'] ? $_GET['type'] : 1;
 
     // 페이지 넘버
-    $page_num = $_GET['page'] ? $_GET['page'] : 1;
+    // $page_num = $_GET['page'] ? $_GET['page'] : 1;
+    $page_num = (isset($_GET['page'])) && $_GET['page'] ? $_GET['page'] : 1;
 
     // 페이지 리스트 갯수
-    $list_num = $_GET['list'] ? $_GET['list'] : 10;
+    // $list_num = $_GET['list'] ? $_GET['list'] : 10;
+    $list_num  = (isset($_GET['list'])) && $_GET['list'] ? $_GET['list'] :10;
 
     // 보여주고자 하는 시작 index위치 db상의
     $s_point = ($page_num - 1) * $list_num;

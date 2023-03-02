@@ -20,12 +20,11 @@
 	$result = mysqli_query($connect, $select_id);
 	$row = mysqli_fetch_array($result);
     // $test = var_dump($row);
-    var_dump(is_null($row));
 	if (is_null($row)) {
 		
 		$insert = "INSERT INTO adm_member(t_id, t_pw, t_name, t_phone, t_rank, t_access, t_team, t_date, t_ip) VALUES ('$t_id', '$t_pw', '$t_name', '$t_phone', '$t_rank', '$t_access','', '$today_detail', '');";
 	    $result = mysqlI_query($connect, $insert);	
-        var_dump(mysqli_error($connect));
+
 
         if($result){
             echo "<script>alert('가입되었습니다.');window.location.replace('../member_insert.php');</script>";
