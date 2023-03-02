@@ -98,11 +98,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="t_pw">비밀번호</label>
-                                <input type="text" class="form-control" name="t_pw" id="t_pw" placeholder="비밀번호" />
+                                <input type="password" class="form-control" name="t_pw" id="t_pw" placeholder="비밀번호" />
                             </div>
                             <div class="form-group">
                                 <label for="t_name">이름</label>
-                                <input type="password" class="form-control" name="t_name" id="t_name" placeholder="이름">
+                                <input type="text" class="form-control" name="t_name" id="t_name" placeholder="이름">
                             </div>
 
                             <div class="form-group">
@@ -249,6 +249,32 @@
                     ?>
 
                 </table>
+            </div>
+            <div class="box-footer clearfix">
+                <ul class="pagination pagination-sm no-margin pull-right">
+                    <? if($page_num <= 1){  ?>
+                    <!-- 페이지 없을 경우 -->
+                    <li><a href="">&laquo;</a></li>
+                    <?}else{ ?>
+
+                    <? if($find == 1){?>
+                    <!-- 페이지 이동 이전  &laqu 특수문자 : << -->
+                    <li><a href="?page=<?=$page_num-1;?>">&laquo;</a></li>
+                    <?}?>
+                    <? }?>
+                    <? 
+
+                        for ($j = $block_start_page; $j <= $block_end_page; $j++){
+                            if($page_num == $j){
+                        }
+                    
+                    ?>
+
+                    <li class="page-item active"><a href="#"><?=$j?></a></li>
+
+                    <?}?>
+
+                </ul>
             </div>
 
         </div>
