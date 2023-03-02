@@ -18,12 +18,13 @@
     $list_num = $_GET['list'] ? $_GET['list'] : 10;
 
     // 보여주고자 하는 시작 index위치 db상의
-    $s_point = ($list_num - 1) * $list_num;
+    $s_point = ($page_num - 1) * $list_num;
 
     // 블럭에 나타낼 페이지 번호 갯수
-    $blcok_num = 5;
+    $block_num = 5;
 
     // 현재 리스트의 블럭 구하기 ceil : 올림
+    // block_num의 배수
     $block = ceil($page_num / $block_num);
 
     //현재 블럭에서 시작페이지 번호
@@ -36,6 +37,8 @@
 
         $sql = "where t_id != 'admin'";
 
+    }else{
+        
     }
 
     $total_count = "SELECT count(t_no) FROM adm_member $sql";
@@ -46,15 +49,59 @@
 
     // 총 페이지 수 = 전체 카운트 / 페이지 리스트 갯수 
     $total_page =  ceil($total_count/$list_num); 
-	
-	if ($block_end_page > $total_page){
-        $block_end_page = $total_page;
-    }
-		
-		
 
+
+	
+	if ($block_end_page > $total_page)
+        $block_end_page = $total_page;
+    
+	
 
 ?>
+
+<script type="text/javascript">
+function member_insert() {
+    if (document.getElementById("t_id").value == "" || document.getElementById("t_pw").value == "" || document
+        .getElementById("t_name").value == "" || document.getElementById("t_rank").value == "" || document
+        .getElementById("t_access").value == "") {
+
+        alert("입력 안된 곳이 있습니다.");
+        return false;
+
+    } else {
+
+        document.insert.submit();
+
+    }
+}
+
+
+function member_update(t_no) {
+
+    console.log(t_no);
+    var t_pw = document.getElementById('t_pw_' + t_no).value;
+    var t_name = document.getElementById('t_name_' + t_no).value;
+    var t_phone = document.getElementById('t_phone_' + t_no).value;
+    var t_rank = document.getElementById('t_rank_' + t_no).value;
+    var t_access = document.getElementById('t_access_' + t_no).value;
+    var t_team = document.getElementById('t_team_' + t_no).value;
+    if (confirm("수정 처리하시겠습니까?") == true) {
+
+        $.get("<?echo $host;?>/admin/function/member_update.php?t_no=" + t_no + "&t_pw=" + t_pw + "&t_name=" + t_name +
+            "&t_phone=" + t_phone + "&t_rank=" + t_rank + "&t_access=" + t_access + "&t_team=" + t_team,
+            function(data, status) {
+                if (data == 200) {
+                    alert('수정되었습니다.');
+                    window.location.reload();
+                }
+
+            });
+
+    }
+
+
+}
+</script>
 
 <div class="content-wrapper">
     <section class="content-header">
@@ -181,23 +228,23 @@
                         
                     ?>
                     <tr align="center">
-                        <td style="vertical-align: middle">
+                        <td style="vertical-align: middle;">
                             <? echo $row['t_id'] ?>
                         </td>
-                        <td style="vertical-align: middle">
-                            <input type="password" id="t_pw_<?echo $row['t_no']?>" value="<? echo $row['t_pw']?>"
+                        <td style="vertical-align: middle;">
+                            <input type="text" id="t_pw_<?echo $row['t_no']?>" value="<? echo $row['t_pw']?>"
                                 class="form-control">
                         </td>
 
-                        <td style="vertical-align: middle">
+                        <td style="vertical-align: middle;">
                             <input type="password" id="t_name_<?echo $row['t_no']?>" value="<? echo $row['t_name']?>"
                                 class="form-control">
                         </td>
-                        <td style="vertical-align: middle">
-                            <input type="password" id="t_phone_<?echo $row['t_no']?>" value="<? echo $row['t_phone']?>"
+                        <td style="vertical-align: middle;">
+                            <input type="text" id="t_phone_<?echo $row['t_no']?>" value="<? echo $row['t_phone']?>"
                                 class="form-control">
                         </td>
-                        <td style="vertical-align: middle">
+                        <td style="vertical-align: middle;">
                             <select class="form-control select2" name="t_rank_<?echo $row['t_no']; ?>"
                                 id="t_rank_<?echo $row['t_no']?>" style="width:100%">
                                 <option value="">직급 선택헤주세요.</option>
@@ -208,7 +255,7 @@
                                 <option value="사원" <?php attr_selected('부장', $row['t_rank'])?>>부장</option>
                             </select>
                         </td>
-                        <td style="vertical-align: middle">
+                        <td style="vertical-align: middle;">
                             <select class="form-control select2" name="t_access_<? echo $row['t_no'];?>"
                                 id="t_access_<? echo $row['t_no'];?>" style="width:100%">
 
@@ -220,7 +267,7 @@
                             </select>
 
                         </td>
-                        <td style="vertical-align: middle">
+                        <td style="vertical-align: middle;">
                             <select class="form-control select2" name="t_team_<?php echo $row['t_no']?>"
                                 id="t_team_<?echo $row['t_no']?>">
                                 <option value="">팀을 선택해주세요.</option>
@@ -231,16 +278,17 @@
                             </select>
                         </td>
 
-                        <td style="vertical-align: middle">
+                        <td style="vertical-align: middle;">
                             <?echo $row['t_date'] ?>
                         </td>
-                        <td style="vertical-align: middle">
+                        <td style="vertical-align: middle;">
                             <? echo $row['t_login_date'] ?>
                         </td>
-                        <td style="vertical-align: middle">
-                            <button value="수정" classs="btn btn-primary"
-                                onclick="member_update('<?echo $row['t_no'];?>')">수정
-                            </button>
+                        <td style="vertical-align: middle;">
+
+                            <button value="수정" class="btn btn-primary"
+                                onclick="member_update('<? echo $row['t_no']; ?>')">수정</button>
+
                         </td>
                     </tr>
                     <?php 
@@ -252,29 +300,71 @@
             </div>
             <div class="box-footer clearfix">
                 <ul class="pagination pagination-sm no-margin pull-right">
-                    <? if($page_num <= 1){  ?>
-                    <!-- 페이지 없을 경우 -->
+
+                    <? if($page_num <= 1){ ?>
+
                     <li><a href="">&laquo;</a></li>
-                    <?}else{ ?>
 
-                    <? if($find == 1){?>
-                    <!-- 페이지 이동 이전  &laqu 특수문자 : << -->
+                    <? }else{ ?>
+
+                    <? if($find == 1){ ?>
+
                     <li><a href="?page=<?=$page_num-1;?>">&laquo;</a></li>
-                    <?}?>
-                    <? }?>
-                    <? 
 
-                        for ($j = $block_start_page; $j <= $block_end_page; $j++){
-                            if($page_num == $j){
-                        }
-                    
-                    ?>
+                    <? }else{ ?>
+
+
+                    <? } ?>
+
+                    <? } ?>
+
+                    <? 
+						
+								for($j = $block_start_page; $j <=$block_end_page; $j++){
+	
+									if($page_num == $j){
+							
+							?>
 
                     <li class="page-item active"><a href="#"><?=$j?></a></li>
 
-                    <?}?>
+                    <? }else{ ?>
+
+                    <? if($find == 1){?>
+
+                    <li><a href="?page=<?=$j?>"><?=$j?></a></li>
+
+                    <? }else{ ?>
+
+                    <? } ?>
+
+                    <? } ?>
+
+                    <? } ?>
+
+                    <?
+							
+                        $total_block = ceil($total_page/$block_num);
+
+                        if($block >= $total_block){
+
+                        }else{   
+
+					?>
+
+                    <? if($find == 1){?>
+
+                    <li><a href="?page=<?=$block_end_page+1?>">&raquo;</a></li>
+
+                    <? }else{ ?>
+
+
+                    <? } ?>
+
+                    <? } ?>
 
                 </ul>
+
             </div>
 
         </div>
