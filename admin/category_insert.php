@@ -56,6 +56,31 @@
 ?>
 
 
+<script type="text/javascript">
+function category_insert() {
+    if (document.getElementById("t_name").value == "") {
+        alert("병원명을 입력해주세요");
+        return false;
+    } else {
+        document.insert.submit()
+    }
+}
+
+function category_update(t_no) {
+    var t_name = document.getElementById("t_name_" + t_no).value;
+
+    if (confirm("수정 처리하시겠습니까?") == true) {
+        $.get("<? echo $host ?>/admin/function/category_update.php?t_no=" + t_no + "&t_name=" + t_name, function(data,
+            status) {
+            if (data == 200) {
+                alert('수정되었습니다.');
+                window.location.reload();
+            }
+        });
+    }
+}
+</script>
+
 
 <div class="content-wrapper">
     <section classs="content-header">
