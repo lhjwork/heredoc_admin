@@ -1,18 +1,45 @@
 <? 
+    include_once('../../dbCon.php');
 
-include_once("../../dbCon.php");
+    $t_name = $_POST['t_name'];
 
- $t_no = $_GET['t_no'];
- $t_name = $_GET['t_name'];
 
- $sql_update = "update adm_category set t_name = '$t_name' where t_no = '$t_no'";
- $result = mysqli_query($connect,$sql_update);
+    // t_category 중복 확인
 
-if($result === true) {
-    echo "200";
-}else{
-    echo "404";
-}
+    while(1){
+        
+        $select = "select t_category from adm_category where t_category = '$t_category'";
+        $rs = mysqli_query($connect, $select);
+        // array : key => value로 변경해줌
+        $row = mysqli_fetch_array($rs);
+
+
+        if($row['t_category'] == '' || is_null($row)){
+            break;
+        }
+        
+    }
+
+    // insert 
+
+    // random_num()
+    function random_num(){
+
+        $str = "1234567890ABCDEFGHIJKLNMOPQRSTUVWXYZ";
+        $code1 = substr(str_shuffle($str),0,1);
+        $code2 = substr(str_shuffle($str),0,1);
+        $code3 = substr(str_shuffle($str),0,1);
+        $code4 = substr(str_shuffle($str),0,1);
+        $code5 = substr(str_shuffle($str),0,1);
+        $code6 = substr(str_shuffle($str),0,1);
+        $code = $code1.$code2.$code3.$code4.$code5.$code6;
+        return $code;
+    }
+
+
+
+
+
 
 
 ?>
