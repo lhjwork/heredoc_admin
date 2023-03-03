@@ -6,6 +6,19 @@
 	
 	$t_name = $_POST['t_name'];
 
+    while(1){
+
+        $t_doc = random_num();
+
+        $select = "select t_doc from adm_doc where t_doc = '$t_doc'";
+        $rs = mysqli_query($connect, $select);
+        $row = mysqli_fetch_array($rs);
+
+        if($row['t_doc'] == '' || is_null($row)){
+            break;
+        }
+
+    }
     
 
     function random_num(){
