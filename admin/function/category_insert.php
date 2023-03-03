@@ -24,6 +24,7 @@
 
     $sql_insert = "INSERT INTO adm_category (t_name) VALUES ('$t_name')";
     $result = mysqli_query($connect, $sql_insert);
+    
 
     echo "<script>window.location.replace('../category_insert.php');</script>";
 
